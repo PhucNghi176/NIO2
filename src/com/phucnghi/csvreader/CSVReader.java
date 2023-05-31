@@ -10,11 +10,9 @@ import java.util.Scanner;
 
 
     class CSVReader extends CSVReaderTemplate {
-        private static final String CSV_FILE_PATH = "C:\\Users\\Admin\\Desktop\\ELCA\\import\\New Microsoft Excel Worksheet.csv";
-        private static final String IMPORT_FOLDER_PATH = "C:\\Users\\Admin\\Desktop\\ELCA\\import";
 
         @Override
-        protected int findCountryColumnIndex() throws IOException {
+        protected int findCountryColumnIndex(String CSV_FILE_PATH) throws IOException {
             int countryColumnIndex = -1;
             try (Scanner scanner = new Scanner(Paths.get(CSV_FILE_PATH))) {
                 if (scanner.hasNextLine()) {
@@ -31,7 +29,7 @@ import java.util.Scanner;
         }
 
         @Override
-        protected int countRowsWithCH(int countryColumnIndex) throws IOException {
+        protected int countRowsWithCH(int countryColumnIndex,String CSV_FILE_PATH) throws IOException {
             int rowCount = 0;
             try (Scanner scanner = new Scanner(Paths.get(CSV_FILE_PATH))) {
                 if (scanner.hasNextLine()) {
@@ -48,7 +46,7 @@ import java.util.Scanner;
         }
 
         @Override
-        protected List<Company> getCompaniesSortedByCapital(int countryColumnIndex) throws IOException {
+        protected List<Company> getCompaniesSortedByCapital(int countryColumnIndex,String CSV_FILE_PATH) throws IOException {
             List<Company> companies = new ArrayList<>();
             try (Scanner scanner = new Scanner(Paths.get(CSV_FILE_PATH))) {
                 if (scanner.hasNextLine()) {
@@ -77,10 +75,10 @@ import java.util.Scanner;
         }
 
         @Override
-        protected void monitorImportFolder(int countryColumnIndex, List<Company> companies) throws IOException, InterruptedException {
+        protected void monitorImportFolder(int countryColumnIndex, List<Company> companies,String CSV_FILE_PATH,String IMPORT_FOLDER_PATH,String CSV_FILE_NAME) throws IOException, InterruptedException {
             WatchService watchService = FileSystems.getDefault().newWatchService();
             Path importFolderPath = Paths.get(IMPORT_FOLDER_PATH);
-            importFolderPath.register(watchService, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_MODIFY);
+            importFolderPath.register(watchService/*, StandardWatchEventKinds.ENTRY_CREATE*/, StandardWatchEventKinds.ENTRY_MODIFY);
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~\n"+"Watching folder: " + IMPORT_FOLDER_PATH);
 
             boolean isRunning = true;
@@ -95,7 +93,7 @@ import java.util.Scanner;
                     }
 
                     Path changedPath = (Path) event.context();
-                    if ("New Microsoft Excel Worksheet.csv".equals(changedPath.getFileName().toString())) {
+                    if (CSV_FILE_NAME.equals(changedPath.getFileName().toString())) {
                         System.out.println(now + ": Detected CSV file change");
                         companies.clear();
                         try (Scanner scanner = new Scanner(Paths.get(CSV_FILE_PATH))) {
