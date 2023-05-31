@@ -1,0 +1,12 @@
+
+z
+java:S1192R"XDefine a constant instead of duplicating this literal "~~~~~~~~~~~~~~~~~~~~~~
+" 4 times.(ÔÖé¤ıÿÿÿÿ8…¹Á˜‡1
+r	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ºíé›ùÿÿÿÿ8ìàš˜‡1
+m	java:S117 "QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÍèÔ8ìàš˜‡1
+r	java:S1171"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¬Î§Ãıÿÿÿÿ8îàš˜‡1
+m	java:S117N"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ïäÑÉ8ñàš˜‡1
+m	java:S117N"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ïäÑÉ8Õœœ˜‡1
+m	java:S117N"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ïäÑÉ8‰‚õ˜‡1
+o
+java:S3776N"RRefactor this method to reduce its Cognitive Complexity from 51 to the 15 allowed.(ïäÑÉ8ÑºÁ˜‡1
